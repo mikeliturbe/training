@@ -27,14 +27,16 @@ class TrainingApi(BaseService):
     async def retrieve_flags(self, request):
         data = dict(await request.json())
         flags, badges = await self.training_svc.get_all_flags_and_badges(data=data)
-        for flag in flags:
-            try:
-                if not flag.completed:
-                    if await flag.verify(self.services):
-                        flag.completed = True
-                    break
-            except Exception as e:
-                logging.error(e)
+        for badge in badges:
+            for flag in badge.flags:
+                try:
+                    if not flag.completed:
+                        if await flag.verify(self.services):
+                            await self.training_svc.update_blockchain(badge, flag)
+                            flag.completed = True
+                        break
+                except Exception as e:
+                    logging.error(e)
         return web.json_response(dict(badges=[b.display for b in badges]))
 
     @check_authorization
