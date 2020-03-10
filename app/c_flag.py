@@ -27,3 +27,6 @@ class Flag(BaseObject):
             ram['flags'].append(self)
             return self.retrieve(ram['flags'], self.unique)
         return existing
+
+    def __repr__(self):
+        return str(self.__dict__)
