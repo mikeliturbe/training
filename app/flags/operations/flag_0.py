@@ -5,7 +5,7 @@ class OperationsFlag0(Flag):
     name = 'Basic operation'
     challenge = 'Run and finish an operation. Use the Ransack adversary profile provided in the Stockpile plugin.'
     extra_info = (
-        'An autonomous operation uses an adversary profile to pre-configures the attack. Agents and C2 run '
+        'An autonomous operation uses an adversary profile to pre-configure the attack. Agents and C2 run '
         'without operator interference. This allows operators to run repeatable adversary emulation '
         'exercises, ensuring that each one is identical to the last.'
     )
